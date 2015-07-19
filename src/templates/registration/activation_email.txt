@@ -1,0 +1,10 @@
+{% load i18n %}
+{% trans "Activate account at hadoe" %} {{ site.name }}:
+
+Click the link below to activate your account.
+http://{{ site.domain }}{% url 'registration_activate' activation_key %}
+https://example.com/accounts/activate/d7b42f723d959abd27df2de7e491f78af3751910
+
+{% blocktrans %}Link is valid for {{ expiration_days }} days.{% endblocktrans %}
+
+Team haode

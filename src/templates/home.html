@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load social_widgets %}
+{% load staticfiles%}
+
+{% block head_title %}Welcome | {{ block.super }}{% endblock %}
+
+
+<style>
+{% block style %}
+
+    .navbar-static-top {
+    	margin-bottom: 0px !important;
+    }
+    .jumbotron {
+    	background-image: url("{% static 'img/hadoe_background.jpg' %}" );
+    	opacity: 0.8;
+    	color: black;  
+    }
+    .valign {
+    	vertical-align: middle;
+    }
+    
+{% endblock %}
+
+</style>
+
+{% block jumbotron%}
+ <div class="jumbotron">
+ 	
+
+
+      
+<div class = "row">
+	<div class = "container">
+<div class = 'col-xs-6'>
+		 <h1>hadoe</h1>
+		        <p>A specialised networking platform, enabling privatised education-based services throughout Africa.</p>
+		        <p>Connect. Educate. Grow.</p>
+		        <p>
+		          <a class="btn btn-lg btn-primary" href="" role="button">Join Us &raquo;</a>
+		        </p>
+		    </div>
+		    <div class = 'col-sm-4 pull-right' style = " height:300px; ">
+		    	<img src="{% static 'img/hadoe_logo.png' %} " height="300" width="300"/>
+
+		    </div>
+		    </div>
+		</div>
+
+		
+
+<div class="row">
+  <div class="col-xs-3 pull-right">
+  	
+			
+				<p class = 'lead text-align-center'></p>
+
+		
+			</div>	
+			</div>
+	</div>
+</div>
+{% endblock %}
+
+	
+
+	{% block content %}
+
+	{%if request.user.is_authenticated %}
+	<h1>Your are logged in! </h1>
+
+	{% if queryset %}
+	<h2> Welcome </h2>
+	<table class = 'table'>
+	{% for instance in queryset %}
+	<tr><td>{{ instance.full_name}} </td></tr>
+	{% endfor %}
+</table>
+	{% endif %}
+	{% endif %}
+	
+	
+
+
+
+<div class = "row">
+		<div class = 'col-sm-3 pull-right'>
+	<form method = 'POST' action = ''>{% csrf_token %}
+			<!-- <input type = 'text'>
+			</input> -->
+			{{form|crispy}}
+			<input class = "btn btn-primary"type = 'submit' value = 'signup'/>
+
+			</form>
+</div>
+	<div class ="col-xs-6">
+{% social_widget_render 'facebook/follow_button.html' href='https://www.facebook.com/hadoe.info' %}
+	</div>
+	<div class ="col-xs-6">
+{% social_widget_render "twitter/follow_button.html" username="hadoe_info" show_screen_name=True %}
+	</div>
+</div>
+
+
+{% endblock %}
